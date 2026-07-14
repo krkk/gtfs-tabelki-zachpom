@@ -7,10 +7,10 @@ nie przygotowałem też metody, by łączyć rozkłady gdy nowy wyjdzie a stary 
 oraz `start_date` i `end_date` to cały rok 2026 (pewnie zgubiłem też parę swiąt przy okazji).
 
 Dostępne feedy:
-- Dąbek: https://krkk.github.io/gtfs-tabelki-zachpom/gtfs-dabek.zip
-- Fedeńczak: https://krkk.github.io/gtfs-tabelki-zachpom/gtfs-fedenczak.zip
-- Styl-bus: https://krkk.github.io/gtfs-tabelki-zachpom/gtfs-stylbus.zip
-- Transa (gmina Kobylanka): https://krkk.github.io/gtfs-tabelki-zachpom/gtfs-transa.zip
+- Dąbek: https://krkk.github.io/gtfs-tabelki-zachpom/dabek.zip
+- Fedeńczak: https://krkk.github.io/gtfs-tabelki-zachpom/fedenczak.zip
+- Styl-bus: https://krkk.github.io/gtfs-tabelki-zachpom/stylbus.zip
+- Transa (gmina Kobylanka): https://krkk.github.io/gtfs-tabelki-zachpom/transa.zip
 
 Generowanie
 
