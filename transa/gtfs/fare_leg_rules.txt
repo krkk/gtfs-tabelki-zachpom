@@ -1,0 +1,6 @@
+from_area_id,to_area_id,fare_product_id
+gm,sz,gm_sz
+sz,gm,gm_sz
+gm,st,gm_st
+st,gm,gm_st
+gm,gm,gm_gm

@@ -1,0 +1,2 @@
+agency_id,agency_name,agency_url,agency_timezone
+transa,Transa (unofficial),https://669ad45b86be9.site123.me/,Europe/Warsaw

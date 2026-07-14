@@ -1,0 +1,9 @@
+[project]
+dependencies = [
+  'beautifulsoup4'
+]
+
+[tool.ruff]
+line-length = 200
+format.quote-style = "single"
+

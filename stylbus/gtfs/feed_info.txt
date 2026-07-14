@@ -1,0 +1,2 @@
+feed_publisher_name,feed_publisher_url,feed_lang
+Karol Kosek,https://github.com/krkk/gtfs-tabelki-zachpom,pl

@@ -1,0 +1,6 @@
+html/
+*.html
+routes.txt
+stop_times.txt
+trips.txt
+*.zip

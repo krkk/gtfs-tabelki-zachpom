@@ -1,0 +1,4 @@
+area_id,area_name
+sz,Szczecin
+gm,Gmina Kobylanka
+st,Stargard

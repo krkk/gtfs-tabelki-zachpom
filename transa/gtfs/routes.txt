@@ -1,0 +1,8 @@
+route_id,agency_id,route_short_name,route_type,route_url,route_color,route_text_color
+341,transa,341,3,https://669ad45b86be9.site123.me/rozk%C5%82ady/komunikacja-gminy-kobylanka,228b22,ffffff
+342,transa,342,3,https://669ad45b86be9.site123.me/rozk%C5%82ady/komunikacja-gminy-kobylanka,228b22,ffffff
+343,transa,343,3,https://669ad45b86be9.site123.me/rozk%C5%82ady/komunikacja-gminy-kobylanka,228b22,ffffff
+344,transa,344,3,https://669ad45b86be9.site123.me/rozk%C5%82ady/komunikacja-gminy-kobylanka,228b22,ffffff
+346,transa,346,3,https://669ad45b86be9.site123.me/rozk%C5%82ady/komunikacja-gminy-kobylanka,228b22,ffffff
+348,transa,348,3,https://669ad45b86be9.site123.me/rozk%C5%82ady/komunikacja-gminy-kobylanka,228b22,ffffff
+349,transa,349,3,https://669ad45b86be9.site123.me/rozk%C5%82ady/komunikacja-gminy-kobylanka,228b22,ffffff

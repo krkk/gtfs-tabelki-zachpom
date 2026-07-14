@@ -1,0 +1,2 @@
+agency_id,agency_name,agency_url,agency_email,agency_timezone
+Styl-bus,Styl-bus Przewozy autobusem (unofficial),https://www.styl-bus.com.pl/,styl-bus@o2.pl,Europe/Warsaw

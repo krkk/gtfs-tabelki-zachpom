@@ -1,0 +1,4 @@
+fare_product_id,fare_product_name,amount,currency
+gm_sz,Gmina Kobylanka - Szczecin,9.00,PLN
+gm_st,Gmina Kobylanka - Stargard,5.00,PLN
+gm_gm,"Linia wewnętrzna, po gminie",1.00,PLN
