@@ -32,7 +32,7 @@ duplicated_stops = {
 }
 stop_names_to_id.update(duplicated_stops)
 
-with open('dabek/dabek.html') as fp:
+with open('dabek/rozklad-jazdy.html') as fp:
     content = BeautifulSoup(fp, 'lxml').select_one('.page-content')
 trip_variant_tables = content.select('table')
 trip_variant_names = (x.get_text() for x in content.select('strong'))
