@@ -1,5 +1,5 @@
 stop_id,stop_lat,stop_lon,stop_name,stop_desc,location_type,parent_station,platform_code
-0774374-1,53.374592,15.369251,Kępno,pozycja nie zweryfikowana,,,
+0774374-1,53.3730,15.3690,Kępno,pozycja nie zweryfikowana,,,
 0774486-1,53.3416233,15.3957489,Szadzko,pozycja nie zweryfikowana,,,
 0778739-1,53.3651028,15.2314673,Czarnkowo,pozycja nie zweryfikowana,,,
 0778745-1,53.3832101,15.1746332,Dalewo,pozycja nie zweryfikowana,,,

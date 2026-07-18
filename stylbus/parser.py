@@ -43,7 +43,6 @@ duplicated_stops = {
     'Stara Dąbrowa skrż': '0783054-1',  # TYPO: Stara Dąbrowa skrż.
     'Grabowo Piaszcze nż.': '0783350-1',  # TYPO: Grabowo Piaszcze nż
     'Kicko skrz.': '0782942-2',  # TYPO: Kicko skrzyż.
-    'Parlino nż.': '0783025-1',  # MERGING WITH: Parlino (raczej niepoprawne bo na rozkładzie jest normalnie jeden po drugim)
 }
 stop_names_to_id.update(duplicated_stops)
 
