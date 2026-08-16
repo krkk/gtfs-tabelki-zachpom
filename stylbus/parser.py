@@ -80,7 +80,7 @@ for route, (route_id, route_long_name) in zip(routes, route_names, strict=True):
             trips_csv.writerow([route_id, service_id, trip_id, headsign, direction_id])
 
     # routes.txt
-    routes_csv.writerow([route_id, 'Styl-bus', 'Styl-bus', route_long_name, 3, 'https://www.styl-bus.com.pl/rozklad-jazdy/{route_id}/'])
+    routes_csv.writerow([route_id, 'Styl-bus', 'Styl-bus', route_long_name, 3, f'https://www.styl-bus.com.pl/rozklad-jazdy/{route_id}/'])
 
 for infp, outname in [(routes_fp, 'routes.txt'), (trips_fp, 'trips.txt'), (stop_times_fp, 'stop_times.txt')]:
     with open('stylbus/gtfs/' + outname, 'w') as fd:
