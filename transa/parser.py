@@ -83,13 +83,14 @@ def gen(direction_id, trip):
         stop_ids = []
         stops_departures = []
 
-        for stop in stops:
+        for trip_seq, stop in enumerate(stops):
             departures = [x.get_text() for x in stop.select('td')]
             stop_name = departures.pop(0).strip()
             stop_name = normalized_stop_names.get(stop_name, stop_name)
             stop_id = stop_names_to_id.get(stop_name)
             if stop_id is not None and stop_id[-1] in '01':
-                stop_id = stop_id[:-1] + str(direction_id)
+                direction = int(direction_id % 2) if direction_id < 4 else int(trip_seq % 2)
+                stop_id = stop_id[:-1] + str(direction)
             if stop_id is None:
                 print(stop_name, 'ist None')
             if stop_name in ['Reptowo - Zachód', 'Reptowo - Skrzyżowanie Motaniec']: # FIXME
