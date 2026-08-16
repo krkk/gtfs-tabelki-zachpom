@@ -26,33 +26,34 @@ def fix_service_id(name):
     return name
 
 
+normalized_stop_names = {
+    'Cisewo - Plac zabaw': 'Cisewo - Plac Zabaw',
+    'Jęczydół - Na Polanie': 'Jęczydół - Os. Na Polanie',
+    'Jęczydół - Os. Na Polania': 'Jęczydół - Os. Na Polanie',
+    'Jęczydół -  Świetlica': 'Jęczydół - Świetlica',
+    'Miedwiecko -Punkt Przesiadkowy': 'Miedwiecko - Punkt Przesiadkowy',
+    'Miedwiecko Punkt Przesiadkowy': 'Miedwiecko - Punkt Przesiadkowy',
+    'Morzyczyn - skrzyżowanie Jęczydół': 'Morzyczyn - Skrzyżowanie Jęczydół',
+    'Morzyczyn-Os. Południowe': 'Morzyczyn - Os. Południowe',
+    'Morzyczyn NETTO': 'Morzyczyn - NETTO',
+    'Niedźwiedź - Sportowa': 'Niedźwiedź - ul. Sportowa',
+    'Reptowo Punkt Przesiadkowy': 'Reptowo - Punkt Przesiadkowy',
+    'Stargard (Lipnik)ul. Lipowa': 'Stargard (Lipnik) Lipowa',
+    'Stargard (Lipnik) - Szczecińska': 'Stargard (Lipnik) Szczecińska',
+    'Stargard ul. Szczecińska - Pl. Zgody': 'Stargard Szczecińska - Pl. Zgody',
+    'Stargardul. Szczecińska - Słoneczna': 'Stargard Szczecińska - Słoneczna',
+    'Stargard ul. Szczecińska - Wieniawskiego': 'Stargard Szczecińska - Wieniawskiego',
+    'Stargardul. Szczecińska - Wieżowiec': 'Stargard Szczecińska - Wieżowiec',
+    'Stargard ZCP Peron 5': 'Stargard ZCP - Peron 5',
+    'SzczecinBasen Górniczy': 'Szczecin - Basen Górniczy',
+    'Szczecin Kijewo': 'Szczecin - Kijewo',
+    'Szczecin Wiosenna': 'Szczecin - Wiosenna',
+    'Szczecin -Płonia Most': 'Szczecin - Płonia Most',
+    'Szczecin Płonia most': 'Szczecin - Płonia Most',
+}
+
 with open('transa/gtfs/stops.txt', newline='') as csvfile:
     stop_names_to_id = {row['stop_name']: row['stop_id'] for row in csv.DictReader(csvfile)}
-duplicated_stops = {
-    'Reptowo Punkt Przesiadkowy': 'RePP',
-    'Stargard ZCP Peron 5': 'StZCP5',
-    'Jęczydół - Na Polanie': 'JeNP',
-    'Jęczydół - Os. Na Polania': 'JeNP',
-    'Morzyczyn NETTO': 'MrzN',
-    'Cisewo - Plac zabaw': 'CsPZ',
-    'Niedźwiedź - Sportowa': 'NiSp',
-    'Morzyczyn - skrzyżowanie Jęczydół': 'MrzSJ',
-    'Morzyczyn-Os. Południowe': 'MrzOP',
-    'Jęczydół -  Świetlica': 'JeS',
-    'SzczecinBasen Górniczy': 'SzBG',
-    'Szczecin Kijewo': 'SzKi',
-    'Szczecin Wiosenna': 'SzW',
-    'Szczecin Płonia most': 'SzPm',
-    'Stargard (Lipnik)ul. Lipowa': 'StLip',
-    'Stargard (Lipnik) - Szczecińska': 'StLSz',
-    'Stargard ul. Szczecińska - Wieniawskiego': 'StWi',
-    'Stargardul. Szczecińska - Wieżowiec': 'StSWz',
-    'Stargardul. Szczecińska - Słoneczna': 'StSS',
-    'Stargard ul. Szczecińska - Pl. Zgody': 'StSPZ',
-    'Miedwiecko -Punkt Przesiadkowy': 'MiPP',
-    'Miedwiecko Punkt Przesiadkowy': 'MiPP',
-}
-stop_names_to_id.update(duplicated_stops)
 
 routes_fp = StringIO()
 routes_csv = csv.writer(routes_fp)
@@ -85,9 +86,14 @@ def gen(direction_id, trip):
         for stop in stops:
             departures = [x.get_text() for x in stop.select('td')]
             stop_name = departures.pop(0).strip()
+            stop_name = normalized_stop_names.get(stop_name, stop_name)
             stop_id = stop_names_to_id.get(stop_name)
+            if stop_id is not None and stop_id[-1] in '01':
+                stop_id = stop_id[:-1] + str(direction_id)
             if stop_id is None:
                 print(stop_name, 'ist None')
+            if stop_name in ['Reptowo - Zachód', 'Reptowo - Skrzyżowanie Motaniec']: # FIXME
+                stop_id = None
 
             stops_departures.append(list(map(fix_time, departures)))
             stop_ids.append(stop_id)
