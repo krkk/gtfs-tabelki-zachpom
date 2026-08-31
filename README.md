@@ -15,6 +15,9 @@ Dostępne feedy:
 Generowanie
 
 ```shell
+$ cd <dabek|fedenczak|stylbus|transa>
+$ ./scrape.sh # jeśli nie istnieje to czytaj parser.py.
+$ cd ..
 $ python3 <dabek|fedenczak|stylbus|transa>/parser.py
 ```
 
