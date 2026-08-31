@@ -46,10 +46,15 @@ normalized_stop_names = {
     'Stargardul. Szczecińska - Wieżowiec': 'Stargard Szczecińska - Wieżowiec',
     'Stargard ZCP Peron 5': 'Stargard ZCP - Peron 5',
     'SzczecinBasen Górniczy': 'Szczecin - Basen Górniczy',
-    'Szczecin Kijewo': 'Szczecin - Kijewo',
-    'Szczecin Wiosenna': 'Szczecin - Wiosenna',
-    'Szczecin -Płonia Most': 'Szczecin - Płonia Most',
-    'Szczecin Płonia most': 'Szczecin - Płonia Most',
+
+    # by może ładnie się łączyło z przystankami ZDITMu
+    'Szczecin - ul. Wyszyńskiego': 'Wyszyńskiego',
+    'Szczecin Kijewo': 'Kijewo',
+    'Szczecin - Kijewo': 'Kijewo',
+    'Szczecin - Wiosenna': 'Wiosenna',
+    'Szczecin Wiosenna': 'Wiosenna',
+    'Szczecin -Płonia Most': 'Płonia Most',
+    'Szczecin Płonia most': 'Płonia Most',
 }
 
 with open('transa/gtfs/stops.txt', newline='') as csvfile:
@@ -63,7 +68,7 @@ trips_csv = csv.writer(trips_fp)
 trips_csv.writerow(['route_id', 'service_id', 'trip_id', 'direction_id'])
 stop_times_fp = StringIO()
 stop_times_csv = csv.writer(stop_times_fp)
-stop_times_csv.writerow(['trip_id', 'arrival_time', 'departure_time', 'stop_id', 'stop_sequence'])
+stop_times_csv.writerow(['trip_id', 'arrival_time', 'departure_time', 'stop_id', 'stop_sequence', 'pickup_type', 'drop_off_type'])
 
 
 def gen(direction_id, trip):
@@ -107,15 +112,18 @@ def gen(direction_id, trip):
                 route_id = route_ids[trip_seq]
             trip_id = f'{route_id}-{direction_id}-{trip_seq}'
 
-            # stop_times.txt
-            for stop_seq, (stop_id, stop_time) in enumerate(zip(stop_ids, trip, strict=True)):
-                if stop_time is not None:
-                    stop_times_csv.writerow([trip_id, stop_time, stop_time, stop_id, stop_seq])
-
             # trips.txt
             direction = int(direction_id % 2) if direction_id < 4 else int(trip_seq % 2)
             trips_csv.writerow([route_id, service_id, trip_id, direction])
 
+            # stop_times.txt
+            for stop_seq, (stop_id, stop_time) in enumerate(zip(stop_ids, trip, strict=True)):
+                if stop_time and stop_id:
+                    # Source: trust me bro, ale jak nie mają nawet tego w cenniku
+                    drop_off_type = 1 if (stop_id.startswith('Sz') and direction == 0) or (stop_id.startswith('St') and direction == 1) else 3
+                    pickup_type = 1 if (stop_id.startswith('Sz') and direction == 1) or (stop_id.startswith('St') and direction == 0) else 3
+
+                    stop_times_csv.writerow([trip_id, stop_time, stop_time, stop_id, stop_seq, pickup_type, drop_off_type])
 
 with open('transa/gmina-kobylanka.html') as fp:
     content = BeautifulSoup(fp, 'lxml').select('table')
