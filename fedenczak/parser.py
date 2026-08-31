@@ -8,6 +8,10 @@ from shutil import copyfileobj, make_archive
 
 
 def fedenczak_find_service_id(text):
+    if text.endswith('zawieszony'):
+        return None
+    text = text.removesuffix(' kursuje od 01.09.2026')
+
     if text.endswith(' E,7') or text.endswith('E7'):
         return 'E7'
     if text.endswith(' E, F'):
@@ -37,7 +41,11 @@ def fedenczak_fix_time(hours, minutes):
 
 
 def fix_time(input: str):
-    time = input.strip().replace(';', ':').replace(' ', ':').rstrip('SDEF').split(':')
+    input = input.strip()
+    if input.endswith('zawieszony'):
+        return None
+    input = input.removesuffix(' kursuje od 01.09.2026')
+    time = input.replace(';', ':').replace(' ', ':').rstrip('SDEF').split(':')
     if '-' in time[0]:
         return None
     hours, minutes = fedenczak_fix_time(time[0], time[1])
@@ -124,7 +132,7 @@ for route_id in sorted(listdir('fedenczak/html')):
             if len(service_ids) == 0:
                 service_ids = [fedenczak_find_service_id(x.get_text()) for x in panel.select('li')]
             else:
-                assert len(service_ids) == len(panel.select('li'))
+                assert len(service_ids) == len(panel.select('li')), f"{len(service_ids)} vs {len(panel.select('li'))} for {stop_name}"
             stops_departures.append(stop_times)
             stop_ids.append(stop_id)
 
